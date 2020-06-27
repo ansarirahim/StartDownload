@@ -1,0 +1,1 @@
+ arm-linux-gnueabihf-g++ maint.cpp SimpleGPI_SPI.cpp -o maint
