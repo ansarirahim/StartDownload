@@ -103,12 +103,12 @@ static void Init_16messageRead256()
     message16Read256[0].tx_buf = (unsigned long)NVM16ReadCmd;
     message16Read256[0].rx_buf = (unsigned long)NULL;
     message16Read256[0].len = sizeof(NVM16ReadCmd);
-    message16Read256[0].cs_change = 1; //0 working for P9_17
+    message16Read256[0].cs_change = 0; //0 working for P9_17
 
     message16Read256[1].tx_buf = (unsigned long)NULL;
     message16Read256[1].rx_buf = (unsigned long)Rxd256;
     message16Read256[1].len = sizeof(Rxd256);
-    message16Read256[1].cs_change = 1;
+    message16Read256[1].cs_change = 0;
 
     NVM16ReadCmd[0] = READ;
     //		    	   (readcommand+1)= &(Spi_address>>16);//
@@ -121,12 +121,12 @@ static void Init_messageRead()
     messageRead[0].tx_buf = (unsigned long)FlashReadCmd;
     messageRead[0].rx_buf = (unsigned long)NULL;
     messageRead[0].len = sizeof(FlashReadCmd);
-    messageRead[0].cs_change = 1; //0 working for P9_17
+    messageRead[0].cs_change =0; //0 working for P9_17
 
     messageRead[1].tx_buf = (unsigned long)NULL;
     messageRead[1].rx_buf = (unsigned long)Rxd256; ///Rxd
     messageRead[1].len = sizeof(Rxd256);
-    messageRead[1].cs_change = 1;
+    messageRead[1].cs_change = 0;
 
     FlashReadCmd[0] = READ;
     //		    	   (readcommand+1)= &(Spi_address>>16);//
@@ -139,12 +139,12 @@ static void Init_16messageRead()
     message16Read[0].tx_buf = (unsigned long)NVM16ReadCmd;
     message16Read[0].rx_buf = (unsigned long)NULL;
     message16Read[0].len = sizeof(NVM16ReadCmd);
-    message16Read[0].cs_change = 1; //0 working for P9_17
+    message16Read[0].cs_change = 0; //0 working for P9_17
 
     message16Read[1].tx_buf = (unsigned long)NULL;
     message16Read[1].rx_buf = (unsigned long)Rxd;
     message16Read[1].len = sizeof(Rxd);
-    message16Read[1].cs_change = 1;
+    message16Read[1].cs_change = 0;
 
     NVM16ReadCmd[0] = READ;
     //		    	   (readcommand+1)= &(Spi_address>>16);//
@@ -160,7 +160,7 @@ static void Init_messageWREN()
     messageWREN[0].tx_buf = (unsigned long)WriteEnableCmd; //send the write enable command
     messageWREN[0].rx_buf = (unsigned long)NULL;
     messageWREN[0].len = 1; // sizeof(WriteEnableCmd);
-    messageWREN[0].cs_change = 1;
+    messageWREN[0].cs_change =0;
 }
 
 static void Init_WriteCommand()
@@ -170,7 +170,7 @@ static void Init_WriteCommand()
     messageWriteCmd[0].tx_buf = (unsigned long)WriteCmd; //send the write command and address
     messageWriteCmd[0].rx_buf = (unsigned long)NULL;
     messageWriteCmd[0].len = sizeof(WriteCmd);
-    messageWriteCmd[0].cs_change = 1;
+    messageWriteCmd[0].cs_change = 0;
 }
 
 static void Init_WriteCommand16FF()
@@ -180,12 +180,12 @@ static void Init_WriteCommand16FF()
     messageWrite16CmdFF[0].tx_buf = (unsigned long)Write16Cmd; //send the write command and address
     messageWrite16CmdFF[0].rx_buf = (unsigned long)NULL;
     messageWrite16CmdFF[0].len = sizeof(Write16Cmd);
-    messageWrite16CmdFF[0].cs_change = 1;
+    messageWrite16CmdFF[0].cs_change = 0;
 
     messageWrite16CmdFF[1].tx_buf = (unsigned long)TempTxData128; //send the write command and address
     messageWrite16CmdFF[1].rx_buf = (unsigned long)NULL;
     messageWrite16CmdFF[1].len = sizeof(TempTxData128);
-    messageWrite16CmdFF[1].cs_change = 1;
+    messageWrite16CmdFF[1].cs_change =0;
 }
 static void Init_WriteCommand16Data()
 {
@@ -194,12 +194,12 @@ static void Init_WriteCommand16Data()
     messageWrite16CmdData[0].tx_buf = (unsigned long)Write16Cmd; //send the write command and address
     messageWrite16CmdData[0].rx_buf = (unsigned long)NULL;
     messageWrite16CmdData[0].len = sizeof(Write16Cmd);
-    messageWrite16CmdData[0].cs_change = 1;
+    messageWrite16CmdData[0].cs_change = 0;
 
     messageWrite16CmdData[1].tx_buf = (unsigned long)TempTxNvmData128; //send the write command and address
     messageWrite16CmdData[1].rx_buf = (unsigned long)NULL;
     messageWrite16CmdData[1].len = sizeof(TempTxNvmData128);
-    messageWrite16CmdData[1].cs_change = 1;
+    messageWrite16CmdData[1].cs_change = 0;
 }
 struct spi_ioc_transfer messageWrite16Cmd[1] = {
     0,
@@ -211,7 +211,7 @@ static void Init_Write16Command()
     messageWrite16Cmd[0].tx_buf = (unsigned long)WriteCmd; //send the write command and address
     messageWrite16Cmd[0].rx_buf = (unsigned long)NULL;
     messageWrite16Cmd[0].len = sizeof(Write16Cmd);
-    messageWrite16Cmd[0].cs_change = 1;
+    messageWrite16Cmd[0].cs_change =0;
 }
 char ReadStatusRegCmd[1] = {
     RDSR,
@@ -224,12 +224,12 @@ static void Init_ReadStatusReg()
     messageStatusReg[0].tx_buf = (unsigned long)ReadStatusRegCmd;
     messageStatusReg[0].rx_buf = (unsigned long)NULL;
     messageStatusReg[0].len = sizeof(ReadStatusRegCmd);
-    messageStatusReg[0].cs_change = 1;
+    messageStatusReg[0].cs_change = 0;
 
     messageStatusReg[1].tx_buf = (unsigned long)NULL;
     messageStatusReg[1].rx_buf = (unsigned long)StatusRegValues;
     messageStatusReg[1].len = sizeof(StatusRegValues);
-    messageStatusReg[1].cs_change = 1;
+    messageStatusReg[1].cs_change = 0;
 }
 const char *DIRECTION_SET_GPIO48 = "echo high > /sys/class/gpio/gpio48/direction";
 const char *DIRECTION_SET_GPIO50 = "echo high > /sys/class/gpio/gpio50/direction";
@@ -294,12 +294,12 @@ int ReadFlashID_Cs(int fd, tByte Cs)
     message[0].tx_buf = (unsigned long)readcommand;
     message[0].rx_buf = (unsigned long)NULL;
     message[0].len = sizeof(readcommand);
-    message[0].cs_change = 1; //working commented to check other cs message[0].cs_change = 0;
+    message[0].cs_change = 0; //working commented to check other cs message[0].cs_change = 0;
 
     message[1].tx_buf = (unsigned long)NULL;
     message[1].rx_buf = (unsigned long)rx;
     message[1].len = sizeof(rx);
-    message[1].cs_change = 1;
+    message[1].cs_change = 0;
     gpio_set_value_spi(Cs, LOW);
     ret = ioctl(fd, SPI_IOC_MESSAGE(2), &message); //spi check if sent
     if (ret < 1)
@@ -395,24 +395,24 @@ void EraseFlashFull_Cs(int fd, tByte Css) ///16,0,1000)
     message[0].tx_buf = (unsigned long)writeenable; //send the write enable command
     message[0].rx_buf = (unsigned long)NULL;
     message[0].len = sizeof(writeenable);
-    message[0].cs_change = 1; //chip select needs to be released
+    message[0].cs_change = 0; //chip select needs to be released
 
     message[1].tx_buf = (unsigned long)writecommand; //send the write command and address
     message[1].rx_buf = (unsigned long)NULL;
     message[1].len = sizeof(writecommand);
-    message[1].cs_change = 1; //keep holding chip select state
+    message[1].cs_change = 0; //keep holding chip select state
 
-    gpio_set_value_spi(Css, LOW); ////	                      //release the chip select line
+    //gpio_set_value_spi(Css, LOW); ////	                      //release the chip select line
 
     ret = ioctl(fd, SPI_IOC_MESSAGE(2), &message); //spi check if sent
-    gpio_set_value_spi(Css, HIGH);
+    //gpio_set_value_spi(Css, HIGH);
     if (ret < 1)
         pabort("can't send spi message");
 
     ///////////////////// usleep(5000);                              //wait 5ms for write command to complete
     uint8_t rxx[2];
     // printf("\nDone :Sector Erase");
-    gpio_set_value_spi(Css, LOW);
+  //  gpio_set_value_spi(Css, LOW);
     ///////////////////////////////////////
     do
     {
@@ -436,7 +436,7 @@ void EraseFlashFull_Cs(int fd, tByte Css) ///16,0,1000)
         message[1].tx_buf = (unsigned long)NULL;
         message[1].rx_buf = (unsigned long)rxx;
         message[1].len = sizeof(rxx);
-        message[1].cs_change = 1;
+        message[1].cs_change = 0;
         ///gpio_set_value_spi(Css, LOW);
         ret = ioctl(fd, SPI_IOC_MESSAGE(2), &message); //spi check if sent
                                                        ///gpio_set_value_spi(Css, HIGH);
@@ -486,11 +486,11 @@ void Spi_Scan_Erase_Cs(unsigned int SizeofMemory, int fdd, tByte Css)
         memset(Rxd256, 0xff, 0x100);
         // spi_ioc_transfer messageRead[2] = {0, };         //setup spi transfer data structure
 
-        gpio_set_value_spi(Css, LOW);
+       /// gpio_set_value_spi(Css, LOW);
 
         ret = ioctl(fdd, SPI_IOC_MESSAGE(2), &messageRead); //spi check if sent
 
-        gpio_set_value_spi(Css, HIGH);
+       /// gpio_set_value_spi(Css, HIGH);
         // usleep(500);
 
         if (ret < 1)
@@ -528,9 +528,9 @@ void Spi_Scan_Erase_Cs(unsigned int SizeofMemory, int fdd, tByte Css)
             ret = ioctl(fdd, SPI_IOC_MESSAGE(1), &messageWREN);
             if (ret < 1)
                 pabort("can't send spi message");
-            AllFlashChipsSelect(HIGH);
+        ///    AllFlashChipsSelect(HIGH);
             usleep(1);
-            AllFlashChipsSelect(LOW);
+        ///    AllFlashChipsSelect(LOW);
             WriteCmd[0] = FLASH_SE;
             WriteCmd[1] = Spi_address >> 16;
             WriteCmd[2] = Spi_address >> 8;
@@ -542,9 +542,9 @@ void Spi_Scan_Erase_Cs(unsigned int SizeofMemory, int fdd, tByte Css)
             while (1)
             {
 
-                gpio_set_value_spi(Css, LOW);
+           ///     gpio_set_value_spi(Css, LOW);
                 ret = ioctl(fdd, SPI_IOC_MESSAGE(2), &messageStatusReg);
-                gpio_set_value_spi(Css, HIGH);
+           ///     gpio_set_value_spi(Css, HIGH);
                 if (ret < 1)
                     pabort("can't send spi message");
                 for (ret = 0; ret < 2; ret++)
@@ -1007,26 +1007,26 @@ static void Simultanious24Write(int fd, unsigned long int NoOfPAges)
             message1[0].tx_buf = (unsigned long)writecommand; //send the write command and address
             message1[0].rx_buf = (unsigned long)NULL;
             message1[0].len = sizeof(writecommand);
-            message1[0].cs_change = 1;
+            message1[0].cs_change = 0;
             message1[1].tx_buf = (unsigned long)FMemorypages[k].PageData;
             ; //data;//TempByteBuffer;//data;         //send the data
             message1[1].rx_buf = (unsigned long)NULL;
             message1[1].len = sizeof(FMemorypages[k].PageData); //data);//TempByteBuffer);
-            message1[1].cs_change = 1;                          //release the chip select line
+            message1[1].cs_change = 0                          //release the chip select line
             usleep(500);
-            gpio_set_value_spi(SS2, LOW);
-            gpio_set_value_spi(SS0, LOW);
-            gpio_set_value_spi(SS4, LOW);
-            gpio_set_value_spi(SS6, LOW);
+//             gpio_set_value_spi(SS2, LOW);
+//             gpio_set_value_spi(SS0, LOW);
+//             gpio_set_value_spi(SS4, LOW);
+//             gpio_set_value_spi(SS6, LOW);
 
             ret = ioctl(fd, SPI_IOC_MESSAGE(2), &message1); //spi check if sent
             if (ret < 1)
                 pabort("can't send spi message");
 
-            gpio_set_value_spi(SS2, HIGH);
-            gpio_set_value_spi(SS0, HIGH);
-            gpio_set_value_spi(SS4, HIGH);
-            gpio_set_value_spi(SS6, HIGH);
+//             gpio_set_value_spi(SS2, HIGH);
+//             gpio_set_value_spi(SS0, HIGH);
+//             gpio_set_value_spi(SS4, HIGH);
+//             gpio_set_value_spi(SS6, HIGH);
             usleep(5000);
             /////////////////////////////////////////////////////////////////////////////////////
         }
@@ -1197,20 +1197,20 @@ static void Simultanious16Write(int fd, unsigned long int NoOfPAges)
             message[0].tx_buf = (unsigned long)writeenable; //send the write enable command
             message[0].rx_buf = (unsigned long)NULL;
             message[0].len = sizeof(writeenable);
-            message[0].cs_change = 1;
+            message[0].cs_change = 0;
             //chip select needs to be released
             usleep(500);
-            gpio_set_value_spi(SS2, LOW);
-            gpio_set_value_spi(SS0, LOW);
-            gpio_set_value_spi(SS4, LOW);
-            gpio_set_value_spi(SS6, LOW);
+//             gpio_set_value_spi(SS2, LOW);
+//             gpio_set_value_spi(SS0, LOW);
+//             gpio_set_value_spi(SS4, LOW);
+//             gpio_set_value_spi(SS6, LOW);
             ret = ioctl(fd, SPI_IOC_MESSAGE(1), &message); //spi check if sent
             if (ret < 1)
                 pabort("can't send spi message");
-            gpio_set_value_spi(SS2, HIGH);
-            gpio_set_value_spi(SS0, HIGH);
-            gpio_set_value_spi(SS4, HIGH);
-            gpio_set_value_spi(SS6, HIGH);
+//             gpio_set_value_spi(SS2, HIGH);
+//             gpio_set_value_spi(SS0, HIGH);
+//             gpio_set_value_spi(SS4, HIGH);
+//             gpio_set_value_spi(SS6, HIGH);
             ///////////////////////////////////////////////////////
             struct spi_ioc_transfer message1[2] = {
                 0,
@@ -1219,26 +1219,26 @@ static void Simultanious16Write(int fd, unsigned long int NoOfPAges)
             message1[0].tx_buf = (unsigned long)writecommand; //send the write command and address
             message1[0].rx_buf = (unsigned long)NULL;
             message1[0].len = sizeof(writecommand);
-            message1[0].cs_change = 1;
+            message1[0].cs_change = 0;
             message1[1].tx_buf = (unsigned long)FMemorypages[k].PageData;
             ; //data;//TempByteBuffer;//data;         //send the data
             message1[1].rx_buf = (unsigned long)NULL;
             message1[1].len = sizeof(FMemorypages[k].PageData); //data);//TempByteBuffer);
-            message1[1].cs_change = 1;                          //release the chip select line
+            message1[1].cs_change = 0;                          //release the chip select line
             usleep(500);
-            gpio_set_value_spi(SS2, LOW);
-            gpio_set_value_spi(SS0, LOW);
-            gpio_set_value_spi(SS4, LOW);
-            gpio_set_value_spi(SS6, LOW);
+//             gpio_set_value_spi(SS2, LOW);
+//             gpio_set_value_spi(SS0, LOW);
+//             gpio_set_value_spi(SS4, LOW);
+//             gpio_set_value_spi(SS6, LOW);
 
             ret = ioctl(fd, SPI_IOC_MESSAGE(2), &message1); //spi check if sent
             if (ret < 1)
                 pabort("can't send spi message");
 
-            gpio_set_value_spi(SS2, HIGH);
-            gpio_set_value_spi(SS0, HIGH);
-            gpio_set_value_spi(SS4, HIGH);
-            gpio_set_value_spi(SS6, HIGH);
+//             gpio_set_value_spi(SS2, HIGH);
+//             gpio_set_value_spi(SS0, HIGH);
+//             gpio_set_value_spi(SS4, HIGH);
+//             gpio_set_value_spi(SS6, HIGH);
             usleep(5000);
             /////////////////////////////////////////////////////////////////////////////////////
         }
@@ -1252,7 +1252,7 @@ int main() ///(int argc, char *argv[])
     int ret = 0;
     int fd;
     memset(TempTxData128, 0x96, sizeof(TempTxData128));
-    initLCD_cd();
+   //// initLCD_cd();
     Init_16messageRead256();
     Init_16messageRead();
     Init_messageRead();
@@ -1307,7 +1307,7 @@ int main() ///(int argc, char *argv[])
     {
         return -1;
     }
-    Init_ChipSS();
+   /// Init_ChipSS();
     ///////////////////////////////
     Spi_address = 0;
     char addressmid, addresslow, addresshigh;
@@ -1346,17 +1346,17 @@ int main() ///(int argc, char *argv[])
             message[0].cs_change = 0;
             //chip select needs to be released
             usleep(500);
-            gpio_set_value_spi(SS2, LOW);
-            gpio_set_value_spi(SS0, LOW);
-            gpio_set_value_spi(SS4, LOW);
-            gpio_set_value_spi(SS6, LOW);
+//             gpio_set_value_spi(SS2, LOW);
+//             gpio_set_value_spi(SS0, LOW);
+//             gpio_set_value_spi(SS4, LOW);
+//             gpio_set_value_spi(SS6, LOW);
             ret = ioctl(fd, SPI_IOC_MESSAGE(1), &message); //spi check if sent
             if (ret < 1)
                 pabort("can't send spi message");
-            gpio_set_value_spi(SS2, HIGH);
-            gpio_set_value_spi(SS0, HIGH);
-            gpio_set_value_spi(SS4, HIGH);
-            gpio_set_value_spi(SS6, HIGH);
+//             gpio_set_value_spi(SS2, HIGH);
+//             gpio_set_value_spi(SS0, HIGH);
+//             gpio_set_value_spi(SS4, HIGH);
+//             gpio_set_value_spi(SS6, HIGH);
             ///////////////////////////////////////////////////////
             struct spi_ioc_transfer message1[2] = {
                 0,
@@ -1372,19 +1372,19 @@ int main() ///(int argc, char *argv[])
             message1[1].len = sizeof(FMemorypages[k].PageData); //data);//TempByteBuffer);
             message1[1].cs_change = 1;                          //release the chip select line
             usleep(500);
-            gpio_set_value_spi(SS2, LOW);
-            gpio_set_value_spi(SS0, LOW);
-            gpio_set_value_spi(SS4, LOW);
-            gpio_set_value_spi(SS6, LOW);
+//             gpio_set_value_spi(SS2, LOW);
+//             gpio_set_value_spi(SS0, LOW);
+//             gpio_set_value_spi(SS4, LOW);
+//             gpio_set_value_spi(SS6, LOW);
 
             ret = ioctl(fd, SPI_IOC_MESSAGE(2), &message1); //spi check if sent
             if (ret < 1)
                 pabort("can't send spi message");
 
-            gpio_set_value_spi(SS2, HIGH);
-            gpio_set_value_spi(SS0, HIGH);
-            gpio_set_value_spi(SS4, HIGH);
-            gpio_set_value_spi(SS6, HIGH);
+//             gpio_set_value_spi(SS2, HIGH);
+//             gpio_set_value_spi(SS0, HIGH);
+//             gpio_set_value_spi(SS4, HIGH);
+//             gpio_set_value_spi(SS6, HIGH);
             usleep(5000);
             /////////////////////////////////////////////////////////////////////////////////////
         }
@@ -1438,12 +1438,12 @@ static int Flash24ReadSingle_Crc_Cs(int fd, unsigned long int NoOfPages, tByte C
             message[0].tx_buf = (unsigned long)readcommand;
             message[0].rx_buf = (unsigned long)NULL;
             message[0].len = sizeof(readcommand);
-            message[0].cs_change = 1; //0 working for P9_17
+            message[0].cs_change = 0; //0 working for P9_17
 
             message[1].tx_buf = (unsigned long)NULL;
             message[1].rx_buf = (unsigned long)rx;
             message[1].len = sizeof(rx);
-            message[1].cs_change = 1;
+            message[1].cs_change =0;
             gpio_set_value_spi(Css, LOW);
 
             usleep(5000);
