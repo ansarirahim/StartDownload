@@ -140,33 +140,33 @@ duration = (((double)( end - start )) / CLK_PER_SEC_ACTUAL)/1000;
     message[0].tx_buf = (unsigned long)writeenable; //send the write enable command
     message[0].rx_buf = (unsigned long)NULL;
     message[0].len = sizeof(writeenable);
-    message[0].cs_change = 1; //chip select needs to be released
+    message[0].cs_change = 0; //chip select needs to be released
     /*
 	   message[1].tx_buf = (unsigned long)writecommand;   //send the write command and address
 	   message[1].rx_buf = (unsigned long)NULL;
 	   message[1].len = sizeof(writecommand);
 	   message[1].cs_change = 1;                     //keep holding chip select state
 */
-    gpio_set_value_spi(Css, LOW); ////	                      //release the chip select line
+    //gpio_set_value_spi(Css, LOW); ////	                      //release the chip select line
 
     ret = ioctl(fd, SPI_IOC_MESSAGE(1), &message); //spi check if sent
-    gpio_set_value_spi(Css, HIGH);
+    //gpio_set_value_spi(Css, HIGH);
     if (ret < 1)
         pabort("can't send spi message");
     message[0].tx_buf = (unsigned long)writecommand; //send the write command and address
     message[0].rx_buf = (unsigned long)NULL;
     message[0].len = sizeof(writecommand);
-    message[0].cs_change = 1;
-    gpio_set_value_spi(Css, LOW);
+    message[0].cs_change = 0;//
+    //gpio_set_value_spi(Css, LOW);
     ret = ioctl(fd, SPI_IOC_MESSAGE(1), &message);
-    gpio_set_value_spi(Css, HIGH);
+   // gpio_set_value_spi(Css, HIGH);
     if (ret < 1)
         pabort("can't send spi message");
     ///////////////////// usleep(5000);                              //wait 5ms for write command to complete
     uint8_t rxx[2];
     // printf("\nDone :Sector Erase");
     usleep(100);
-    gpio_set_value_spi(Css, LOW);
+    //gpio_set_value_spi(Css, LOW);
     ///////////////////////////////////////
     do
     {
@@ -211,7 +211,7 @@ duration = (((double)( end - start )) / CLK_PER_SEC_ACTUAL)/1000;
     } while (rxx[0] & 01 != 0);
     ////\	cout<<"ACK\r\n"<<endl;///printf("\nErased");
     //////	  end = clock();
-    gpio_set_value_spi(Css, HIGH);
+    ///gpio_set_value_spi(Css, HIGH);
 
     // Compute the duration
     ///                     if(time_enable){
